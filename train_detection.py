@@ -30,13 +30,13 @@ def main(args):
 
     if args.dataset in ['voc', 'pascal']:
         from data_loader.detection.voc import VOCDataset, VOC_CLASS_LIST
-        train_dataset_2007 = VOCDataset(root_dir=args.data_path, transform=train_transform,
+        train_dataset= VOCDataset(root_dir=args.data_path, transform=train_transform,
                                         target_transform=target_transform,
                                         is_training=True, split="VOC2007")
-        train_dataset_2012 = VOCDataset(root_dir=args.data_path, transform=train_transform,
-                                        target_transform=target_transform,
-                                        is_training=True, split="VOC2012")
-        train_dataset = torch.utils.data.ConcatDataset([train_dataset_2007, train_dataset_2012])
+        #train_dataset_2012 = VOCDataset(root_dir=args.data_path, transform=train_transform,
+        #                                target_transform=target_transform,
+        #                                is_training=True, split="VOC2012")
+        #train_dataset = torch.utils.data.ConcatDataset([train_dataset_2007, train_dataset_2012])
         val_dataset = VOCDataset(root_dir=args.data_path, transform=val_transform, target_transform=target_transform,
                                  is_training=False, split="VOC2007")
         num_classes = len(VOC_CLASS_LIST)

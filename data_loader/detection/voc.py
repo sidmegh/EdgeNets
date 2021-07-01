@@ -9,12 +9,7 @@ import numpy as np
 import xml.etree.ElementTree as ET
 from PIL import Image
 
-VOC_CLASS_LIST = ['__background__',
-                   'aeroplane', 'bicycle', 'bird', 'boat',
-                   'bottle', 'bus', 'car', 'cat', 'chair',
-                   'cow', 'diningtable', 'dog', 'horse',
-                   'motorbike', 'person', 'pottedplant',
-                   'sheep', 'sofa', 'train', 'tvmonitor']
+VOC_CLASS_LIST = ['__background__', 'AC', 'Books', 'Hand Bag', 'Laptop', 'Shirt', 'Soft Drink', 'Tide']
 
 class VOCDataset(data.Dataset):
 
@@ -30,9 +25,9 @@ class VOCDataset(data.Dataset):
         '''
         super(VOCDataset, self).__init__()
         if is_training:
-            search_paths = os.path.join(root_dir, split, "ImageSets", "Main", "trainval.txt")
+            search_paths = os.path.join(root_dir, "ann.txt")
         else:
-            search_paths = os.path.join(root_dir, split, "ImageSets", "Main", "test.txt")
+            search_paths = os.path.join(root_dir, "ann.txt")
 
         self.ids = VOCDataset._read_image_ids(search_paths)
 
@@ -81,7 +76,7 @@ class VOCDataset(data.Dataset):
         return ids
 
     def _get_annotation(self, image_id):
-        annotation_file = os.path.join(self.data_dir, self.split, "Annotations", "%s.xml" % image_id)
+        annotation_file = os.path.join(self.data_dir,  "Annotations", "%s.xml" % image_id)
         objects = ET.parse(annotation_file).findall("object")
         boxes = []
         labels = []
@@ -104,7 +99,7 @@ class VOCDataset(data.Dataset):
                 np.array(is_difficult, dtype=np.uint8))
 
     def _read_image(self, image_id):
-        image_file = os.path.join(self.data_dir, self.split, "JPEGImages", "%s.jpg" % image_id)
+        image_file = os.path.join(self.data_dir, "JPEGImages", "%s.jpg" % image_id)
         image = Image.open(image_file).convert("RGB")
         image = np.array(image)
         return image
