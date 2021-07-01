@@ -32,7 +32,7 @@ def main(args):
         from data_loader.detection.voc import VOCDataset, VOC_CLASS_LIST
         train_dataset= VOCDataset(root_dir=args.data_path, transform=train_transform,
                                         target_transform=target_transform,
-                                        is_training=True, split="VOC2007")
+                                        is_training=True, split="")
         #train_dataset_2012 = VOCDataset(root_dir=args.data_path, transform=train_transform,
         #                                target_transform=target_transform,
         #                                is_training=True, split="VOC2012")
