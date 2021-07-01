@@ -38,7 +38,7 @@ def main(args):
         #                                is_training=True, split="VOC2012")
         #train_dataset = torch.utils.data.ConcatDataset([train_dataset_2007, train_dataset_2012])
         val_dataset = VOCDataset(root_dir=args.data_path, transform=val_transform, target_transform=target_transform,
-                                 is_training=False, split="VOC2007")
+                                 is_training=False, split="")
         num_classes = len(VOC_CLASS_LIST)
     elif args.dataset == 'coco':
         from data_loader.detection.coco import COCOObjectDetection, COCO_CLASS_LIST
